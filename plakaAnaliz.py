@@ -3,6 +3,7 @@ from logging import exception
 from os import listdir
 import pytesseract, cv2, imutils as imt, datetime
 import os
+# plt degisken
 plt =""
 def readplate(gelenFrame):
 
@@ -33,6 +34,7 @@ def readplate(gelenFrame):
                 x, y, w, h = cv2.boundingRect(contour)
                 license_plate = gray_image[y:y + h, x:x + w]
                 break
+
         (thresh, blackAndWhiteImage) = cv2.threshold(license_plate, 100, 255, cv2.THRESH_BINARY)
         texto = pytesseract.image_to_string(blackAndWhiteImage, config='--psm 6')
         global plt 
