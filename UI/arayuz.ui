@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1341</width>
+    <height>1018</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>841</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GÖRÜNTÜ</string>
+    </property>
+    <widget class="QLabel" name="lblVid">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>831</width>
+       <height>591</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>GÖRÜNTÜ BEKLENİYOR</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>160</y>
+      <width>451</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>AYARLAMALAR</string>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>446</width>
+       <height>312</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="checkMesafe">
+        <property name="text">
+         <string>MESAFE(PX*CM)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>MESAFE SAPMA DEĞERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="sldSapmaDegeri">
+        <property name="maximum">
+         <number>50</number>
+        </property>
+        <property name="pageStep">
+         <number>50</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkGirisCikis">
+        <property name="text">
+         <string>GİRİŞ ÇIKIŞ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkPlakaAnaliz">
+        <property name="text">
+         <string>PLAKA ANALİZ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblPlakaAnaliz">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkTanimlananArac">
+        <property name="text">
+         <string>TANIMLANAN ARAÇLARI GÖSTER</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checAracResimKayit">
+        <property name="text">
+         <string>TANIMLANAN ARAÇLARI KAYDET</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="checkMaske">
+          <property name="text">
+           <string>MASKE ANALİZ</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioMaskeTanimliInsan">
+          <property name="text">
+           <string>TANIMLI INSANLAR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radioMaskeCevreAnalizEt">
+          <property name="text">
+           <string>ÇEVREYİ KONTROL ET</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>350</y>
+       <width>451</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>TANIMLI NESNELER</string>
+     </property>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>451</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="checkAraba">
+         <property name="text">
+          <string>ARABA</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkKamyon">
+         <property name="text">
+          <string>KAMYON</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkInsan">
+         <property name="text">
+          <string>İNSAN</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>731</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnBaslat">
+       <property name="text">
+        <string>BAŞLAT</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnGoruntuKaydet">
+       <property name="text">
+        <string>GORUNTU KAYDET</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnKapat">
+       <property name="text">
+        <string>KAPAT</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>50</y>
+      <width>451</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GÖRÜNTÜ AYARLARI</string>
+    </property>
+    <widget class="QRadioButton" name="radioKamera">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>KAMERA KULLAN</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioVideo">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>30</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>VİDEO ADRESİ KULLAN</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtVideoAdress">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>70</y>
+       <width>181</width>
+       <height>32</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtKameraAdress">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>201</width>
+       <height>32</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lblHataGoster">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>0</y>
+      <width>178</width>
+      <height>49</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(170, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>650</y>
+      <width>1361</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>ÖZELLİKLER</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1351</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>231</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>GÖRÜNTÜ ÖZELLİKLERİ</string>
+       </property>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>FPS:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblFbs">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>40</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblWidth">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>70</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelwidth">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>70</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>WİDTH:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblHeight">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>100</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblhig">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>58</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>HEİGHT:</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblAracResim">
+       <property name="geometry">
+        <rect>
+         <x>1050</x>
+         <y>30</y>
+         <width>281</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TESPİT EDİLMEDİ</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>1050</x>
+         <y>10</y>
+         <width>201</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>GİRİŞ ÇIKIŞ YAPAN ARAÇLAR</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_7">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>0</y>
+         <width>341</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>ARAÇ RESİM PLAKA KONTROL</string>
+       </property>
+       <widget class="QLineEdit" name="txtPlakaResimAdresi">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>50</y>
+          <width>261</width>
+          <height>32</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnPlakaResimKontrol">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>90</y>
+          <width>261</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>RESMİ KONTROL ET</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblPlakaBilgileri">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>321</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QListWidget" name="listMessage">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>30</y>
+         <width>451</width>
+         <height>241</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(67, 67, 67);
+color: rgb(193, 193, 0);</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>10</y>
+         <width>55</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ÇIKTILAR</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblMaskesiz">
+       <property name="geometry">
+        <rect>
+         <x>1050</x>
+         <y>160</y>
+         <width>261</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TESPİT EDİLMEDİ</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblMasketitle">
+       <property name="geometry">
+        <rect>
+         <x>1050</x>
+         <y>130</y>
+         <width>201</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>MASKESİZ KİŞİLER</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>ANALİZ DEGERLERİ</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1341</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
