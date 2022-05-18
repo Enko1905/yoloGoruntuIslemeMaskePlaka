@@ -1,1 +1,2 @@
 # kigs
+arayuz guncellendi
