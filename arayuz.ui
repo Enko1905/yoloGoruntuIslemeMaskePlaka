@@ -168,7 +168,7 @@
         <x>0</x>
         <y>20</y>
         <width>451</width>
-        <height>91</height>
+        <height>108</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -183,6 +183,13 @@
         <widget class="QCheckBox" name="checkKamyon">
          <property name="text">
           <string>KAMYON</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkMotosiklet">
+         <property name="text">
+          <string>MOTOSİKLET</string>
          </property>
         </widget>
        </item>

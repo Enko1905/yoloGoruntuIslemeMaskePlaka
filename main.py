@@ -1,6 +1,3 @@
-
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget
 from PyQt5.QtWidgets import QApplication, QSizePolicy, QGridLayout
@@ -23,7 +20,7 @@ class islem(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        
+
 
         self.kameraAdress=0
         self.tanimliNesneler = []
@@ -38,7 +35,6 @@ class islem(QMainWindow):
         self.aracResimKaydet = False
         #self.tanimlananNesneFotografi = False
 
-
         self.sapmaDegeri = 10
         self.ui.btnBaslat.clicked.connect(self.baslatVideo)
         self.ui.btnKapat.clicked.connect(app.exit)
@@ -48,6 +44,7 @@ class islem(QMainWindow):
         self.ui.checkAraba.stateChanged.connect(self.TanimliNesneEkle)
         self.ui.checkKamyon.stateChanged.connect(self.TanimliNesneEkle)
         self.ui.checkInsan.stateChanged.connect(self.TanimliNesneEkle)
+        self.ui.checkMotosiklet.stateChanged.connect(self.TanimliNesneEkle)
 
         self.ui.checkTanimlananArac.stateChanged.connect(self.ozellikAktiflik)
         self.ui.checkMesafe.stateChanged.connect(self.ozellikAktiflik)
@@ -64,9 +61,9 @@ class islem(QMainWindow):
         self.ui.radioMaskeTanimliInsan.toggled.connect(self.MaskeTanimliInsan)
         self.ui.radioMaskeCevreAnalizEt.toggled.connect(self.MaskeCevreAnalizet)
         self.ui.sldSapmaDegeri.valueChanged[int].connect(self.changeValue)
-        
+
         self.ui.btnDurdur.clicked.connect(self.durdur)
-        
+
 
     def baslatVideo(self):
         try:
@@ -91,10 +88,10 @@ class islem(QMainWindow):
             self.maskeCevreAnalizetSec =False
     def MaskeCevreAnalizet(self,selected):
          if(selected):
-            self.maskeCevreAnalizetSec =True  
+            self.maskeCevreAnalizetSec =True
             self.maskeTanimliInsanSec =False
-                 
-        
+
+
 
     def videoAktifKonum(self,selected):
         if(selected):
@@ -104,7 +101,7 @@ class islem(QMainWindow):
                 self.kameraAdress=str(self.ui.txtVideoAdress.text())
     def plakaResimKontrol(self):
         try:
-            plaka= pltAnaliz.resimKonrol(self.ui.txtPlakaResimAdresi.text())   
+            plaka= pltAnaliz.resimKonrol(self.ui.txtPlakaResimAdresi.text())
             self.ui.lblPlakaBilgileri.setText("PLAKA NO :"+plaka)
         except Exception as hata:
             self.ui.listMessage.addItem("Plaka Adresi Okunamadı ! ")
@@ -113,21 +110,21 @@ class islem(QMainWindow):
         self.ayiriciMesafe = False
         self.girisCikis = False
         self.maskeTanima =False
-        self.plakaAnaliz = False  
-        self.aracResimKaydet =False  
+        self.plakaAnaliz = False
+        self.aracResimKaydet =False
         self.tanimlananNesneFotografi=False
         if(self.ui.checkMesafe.isChecked()):
             self.ayiriciMesafe = True
         if(self.ui.checkGirisCikis.isChecked()):
             self.girisCikis = True
         if(self.ui.checkMaske.isChecked()):
-            self.maskeTanima = True        
+            self.maskeTanima = True
         if(self.ui.checkPlakaAnaliz.isChecked()):
-            self.plakaAnaliz = True        
+            self.plakaAnaliz = True
         if(self.ui.checkTanimlananArac.isChecked()):
-            self.tanimlananNesneFotografi = True    
+            self.tanimlananNesneFotografi = True
         if(self.ui.checAracResimKayit.isChecked()):
-            self.aracResimKaydet =True 
+            self.aracResimKaydet =True
 
 
 
@@ -139,7 +136,9 @@ class islem(QMainWindow):
             self.tanimliNesneler.append("kamyon")
         if(self.ui.checkInsan.isChecked()):
             self.tanimliNesneler.append("insan")
-        
+        if(self.ui.checkMotosiklet.isChecked):
+            self.tanimliNesneler.append("motosiklet")
+
     def ozelliklerYaz(self):
 
         self.ui.lblHeight.setText(str(round(self.cap.get(3))))
@@ -148,8 +147,9 @@ class islem(QMainWindow):
 
     def durdur(self):
         self.ui.listMessage.addItem("KAMERA GÖRÜNTÜSÜ KAPATILDI")
+
         self.cap.release()
-        
+
     def startVideo(self):
         self.ui.lblHataGoster.setText("")
         try:
@@ -174,17 +174,17 @@ class islem(QMainWindow):
         if(self.maskeTanima):
             self.face_cascade=cv2.CascadeClassifier('maskeModul/haarcascade_frontalface_default.xml')
             self.mymodel=load_model('maskeModul/model.h5')
-        
+
 
         classes = []
         with open("yolo_tiny/classesTr.txt", "r") as file_object:
             for class_name in file_object.readlines():
                 #print(class_name)
                 class_name = class_name.strip()  # satır arası boşluklar için
-                classes.append(class_name)      
+                classes.append(class_name)
 
         ret, self.frame = self.cap.read()
-      
+
         if ret == True:
             (class_ids, scores, kordinatlar) = model.detect(self.frame, confThreshold=0.5, nmsThreshold=.4)
             for class_id, score, kordinat in zip(class_ids, scores, kordinatlar):
@@ -195,14 +195,14 @@ class islem(QMainWindow):
                     cv2.rectangle(self.frame, (self.x, self.y), (self.x + self.w, self.y + self.h), (255,20,20), 3)
                     cv2.rectangle(self.frame,(self.x,self.y-5),(self.x+140,self.y-30),(255,100,100),-1)
                     cv2.putText(self.frame, class_name+" "+str(round(score,1)), (self.x, self.y - 7), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,0), 2)
-                    
+
                     if(self.ayiriciMesafe):
                         self.ayiriciCiz()
                     if(self.girisCikis):
                         self.sayNesne()
                     if(self.maskeTanima):
                         self.maskeAlgila()
-                    
+
             self.frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
             img = QImage(self.frame, self.frame.shape[1], self.frame.shape[0], QImage.Format_RGB888)
             pix = QPixmap.fromImage(img)
@@ -222,22 +222,22 @@ class islem(QMainWindow):
 
             if((self.araclarArasiKordinat[0][1]+self.sapmaDegeri)>=self.araclarArasiKordinat[1][1] or (self.araclarArasiKordinat[0][1]>=self.araclarArasiKordinat[1][1]+self.sapmaDegeri)):
                 self.araclarArasiKordinat.clear()
-            else:   
+            else:
                 hesap = az.mesafeHesapla(self.araclarArasiKordinat)
                 hesap = round(hesap,2)
-                
+
                 if(hesap<1):
                     renk_cizgi=[0,0,255]
                     cv2.putText(self.frame,("YAKIN TEMAS"),(200,200), cv2.FONT_HERSHEY_PLAIN, 5, (0,0,255), 9)
                     self.ui.listMessage.addItem("YAKIN TEMAS TESPİT EDİLDİ !")
 
-                            
+
                 cv2.putText(self.frame,str(hesap)+"PX/CM" , (self.x+self.w,y_alt), cv2.FONT_HERSHEY_PLAIN, 3, (255,255,255), 4)
                 cv2.circle(self.frame,(x_ust,y_alt),10,(255,255,255),-1)
                 cv2.line(self.frame,(self.araclarArasiKordinat[0][0],self.araclarArasiKordinat[0][1]),(self.araclarArasiKordinat[1][0],self.araclarArasiKordinat[1][1]),(renk_cizgi[0],renk_cizgi[1],renk_cizgi[2]),2)
                 self.araclarArasiKordinat.clear()
 
-    
+
     def sayNesne(self):
 
         bilgi =None
@@ -248,22 +248,22 @@ class islem(QMainWindow):
                 self.plakaAnalizet(self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
             if(self.aracResimKaydet):
                 cv2.imwrite(f'imagesOto/{self.x,self.y}.png',self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
-           
+
             renkSen = [0,255,0,-1]
             kr[0]+=1
             bilgi = "GELEN: "+str(kr[0])+" GİDEN:"+str(kr[1])
-        
+
         cv2.circle(self.frame,(x1,self.y),10,(255,255,255),-1)
-            
+
         cv2.rectangle(self.frame,(100,600),(800,610),(renkSen[0],renkSen[1],renkSen[2]),renkSen[3])
         cv2.putText(self.frame,str(kr[0]),(400,590), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,0), 2)
         cv2.putText(self.frame,("Gelenler"),(100,600), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 2)
-            
+
         if(self.y>600 and self.y <610 and x1>1200 and  x1<2300):
             if(self.plakaAnaliz):
                 self.plakaAnalizet(self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
             if(self.aracResimKaydet):
-                cv2.imwrite(f'imagesOto/{self.x,self.y}.png',self.frame[self.y:self.y + self.h, self.x:self.x + self.w])    
+                cv2.imwrite(f'imagesOto/{self.x,self.y}.png',self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
             kr[1]+=1
             renkSen = [0,255,0,-1]
             bilgi = "GELEN: "+str(kr[0])+" GİDEN:"+str(kr[1])
@@ -282,7 +282,7 @@ class islem(QMainWindow):
         for(x,y,w,h) in face:
             face_img = img[self.y:self.y+self.h, self.x:self.x+self.w]
             cv2.imwrite('maskeModul/temp.jpg',face_img)
-            
+
             test_image=image.load_img('maskeModul/temp.jpg',target_size=(150,150,3))
             test_image=image.img_to_array(test_image)
             test_image=np.expand_dims(test_image,axis=0)
@@ -294,14 +294,14 @@ class islem(QMainWindow):
                 cv2.putText(img,'MASKE YOK',((x+w)//2,y+h+20),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2)
                 cv2.putText(img,'maskesiz sayisi :'+str(face.shape[0]),(0,img.shape[0]-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),3)
                 self.ui.listMessage.addItem(f"MASKESİZ {str(face.shape[0])} KİŞİ TESBİT EDİLDİ")
-            
+
             else:
                 cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)
                 cv2.putText(img,'MASKE VAR',((x+w)//2,y+h+20),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
-                
+
             datet=str(datetime.datetime.now())
             cv2.putText(img,datet,(400,450),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
-        
+
     def plakaAnalizet(self,frame):
         plakaGelenVeri= pltAnaliz.readplate(frame)
         if(self.tanimlananNesneFotografi):
