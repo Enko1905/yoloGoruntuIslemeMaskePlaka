@@ -43,13 +43,18 @@ class AnalizIslem(veriTabani):
     def komutGonder(self,sorgu):
          self.imlec.execute(sorgu)
          self.baglanti.commit()
+
     def maskeGuncelle(self,maskeli,maskesiz):
         pass
 
-
     def girisCikisGuncelle(self,giren,cikan):
-        self.giren +=giren
-        self.cikan +=cikan
+        pass
+    def plakaKayitEt(self,maskesizSayisi,tarih):
+        pass
+    def riskDurumuKayit(self,tarih,temas):
+        pass
+
+
     def ekranaBas(self):
         print("GELEN PLAKA : ,",self.plaka)
         print("GELEN MASKELİ :,",self.maskeli)
