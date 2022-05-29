@@ -289,8 +289,8 @@ class islem(QMainWindow):
             pred=self.mymodel.predict(test_image)[0][0]
             if pred==1:
                 cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)
-                cv2.imwrite('yuz.png', img[y:y+h,x:x+w], [cv2.IMWRITE_JPEG_QUALITY, 10])
-                self.ui.lblMaskesiz.setPixmap(QtGui.QPixmap("yuz.png"))
+                cv2.imwrite('kigsTemp/yuz.png', img[y:y+h,x:x+w], [cv2.IMWRITE_JPEG_QUALITY, 10])
+                self.ui.lblMaskesiz.setPixmap(QtGui.QPixmap("kigsTemp/yuz.png"))
                 cv2.putText(img,'MASKE YOK',((x+w)//2,y+h+20),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2)
                 cv2.putText(img,'maskesiz sayisi :'+str(face.shape[0]),(0,img.shape[0]-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),3)
                 self.ui.listMessage.addItem(f"MASKESİZ {str(face.shape[0])} KİŞİ TESBİT EDİLDİ")
@@ -305,8 +305,8 @@ class islem(QMainWindow):
     def plakaAnalizet(self,frame):
         plakaGelenVeri= pltAnaliz.readplate(frame)
         if(self.tanimlananNesneFotografi):
-            cv2.imwrite('tanimli.png', frame, [cv2.IMWRITE_JPEG_QUALITY, 10])
-            self.ui.lblAracResim.setPixmap(QtGui.QPixmap("tanimli.png"))
+            cv2.imwrite('kigsTemp/tanimli.png', frame, [cv2.IMWRITE_JPEG_QUALITY, 10])
+            self.ui.lblAracResim.setPixmap(QtGui.QPixmap("kigsTemp/tanimli.png"))
             self.ui.listMessagePlt.addItem(plakaGelenVeri)
 
 
