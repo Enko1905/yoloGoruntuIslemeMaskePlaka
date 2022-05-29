@@ -39,6 +39,7 @@ class AnalizIslem(veriTabani):
         self.giren = None
         self.cikan = None
         self.tarih = datetime.datetime.now()
+
     def veriCekFetch(self,sorgu):
         self.imlec.execute(sorgu)
         return self.imlec.fetchall()
