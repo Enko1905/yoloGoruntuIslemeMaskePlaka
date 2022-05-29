@@ -12,6 +12,8 @@ from tensorflow.keras.models import load_model
 import datetime
 import numpy as np
 import plakaAnaliz as pltAnaliz
+import vt
+
 
 kr = [0,0]
 class islem(QMainWindow):
@@ -64,6 +66,7 @@ class islem(QMainWindow):
 
         self.ui.btnDurdur.clicked.connect(self.durdur)
 
+        self.data = vt.AnalizIslem()
 
     def baslatVideo(self):
         try:
@@ -103,6 +106,7 @@ class islem(QMainWindow):
         try:
             plaka= pltAnaliz.resimKonrol(self.ui.txtPlakaResimAdresi.text())
             self.ui.lblPlakaBilgileri.setText("PLAKA NO :"+plaka)
+
         except Exception as hata:
             self.ui.listMessage.addItem("Plaka Adresi Okunamadı ! ")
 
@@ -229,6 +233,7 @@ class islem(QMainWindow):
                 if(hesap<1):
                     renk_cizgi=[0,0,255]
                     cv2.putText(self.frame,("YAKIN TEMAS"),(200,200), cv2.FONT_HERSHEY_PLAIN, 5, (0,0,255), 9)
+                    self.data.riskDurumuKayit(1)
                     self.ui.listMessage.addItem("YAKIN TEMAS TESPİT EDİLDİ !")
 
 
@@ -267,6 +272,7 @@ class islem(QMainWindow):
             kr[1]+=1
             renkSen = [0,255,0,-1]
             bilgi = "GELEN: "+str(kr[0])+" GİDEN:"+str(kr[1])
+        self.data.girisCikisKayit(kr[0],kr[1])
 
         cv2.rectangle(self.frame,(1200,600),(1900,610),(renkSen[0],renkSen[1],renkSen[2]),renkSen[3])
         cv2.putText(self.frame,("Gidenler"),(1200,600), cv2.FONT_HERSHEY_PLAIN, 3, (0,255,0), 2)
@@ -293,6 +299,7 @@ class islem(QMainWindow):
                 self.ui.lblMaskesiz.setPixmap(QtGui.QPixmap("kigsTemp/yuz.png"))
                 cv2.putText(img,'MASKE YOK',((x+w)//2,y+h+20),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2)
                 cv2.putText(img,'maskesiz sayisi :'+str(face.shape[0]),(0,img.shape[0]-10),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),3)
+                self.data.maskeKayit(str(face.shape[0]))
                 self.ui.listMessage.addItem(f"MASKESİZ {str(face.shape[0])} KİŞİ TESBİT EDİLDİ")
 
             else:
@@ -307,7 +314,9 @@ class islem(QMainWindow):
         if(self.tanimlananNesneFotografi):
             cv2.imwrite('kigsTemp/tanimli.png', frame, [cv2.IMWRITE_JPEG_QUALITY, 10])
             self.ui.lblAracResim.setPixmap(QtGui.QPixmap("kigsTemp/tanimli.png"))
-            self.ui.listMessagePlt.addItem(plakaGelenVeri)
+            strCevirPlaka = str("Araç Girişİ PLAKA: "+str(plakaGelenVeri))
+            self.ui.listMessagePlt.addItem(strCevirPlaka)
+            self.data.plakaKayitEt(plakaGelenVeri)
 
 
 

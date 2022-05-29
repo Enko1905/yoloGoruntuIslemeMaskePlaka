@@ -46,7 +46,7 @@ def readplate(gelenFrame):
                 Plakalar.append(texto)
                 for i in Plakalar:
                     dosya.write(f' \n {i} arac su {DTNow} vakitte geldi.')
-            return str("Araç Giriş Tarih: "+DTNow+" PL: "+plt)
+            return str(plt)
 
     except Exception as e:
         print("Tanımlanamıyan Plaka --> "+str(e))
