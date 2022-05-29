@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'arayuz.ui'
+# Form implementation generated from reading ui file 'UI/arayuz.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -113,16 +113,16 @@ class Ui_MainWindow(object):
         self.groupBox_5.setGeometry(QtCore.QRect(840, 50, 451, 111))
         self.groupBox_5.setObjectName("groupBox_5")
         self.radioKamera = QtWidgets.QRadioButton(self.groupBox_5)
-        self.radioKamera.setGeometry(QtCore.QRect(10, 30, 191, 22))
+        self.radioKamera.setGeometry(QtCore.QRect(10, 80, 191, 22))
         self.radioKamera.setObjectName("radioKamera")
         self.radioVideo = QtWidgets.QRadioButton(self.groupBox_5)
-        self.radioVideo.setGeometry(QtCore.QRect(250, 30, 171, 22))
+        self.radioVideo.setGeometry(QtCore.QRect(230, 80, 171, 22))
         self.radioVideo.setObjectName("radioVideo")
         self.txtVideoAdress = QtWidgets.QLineEdit(self.groupBox_5)
-        self.txtVideoAdress.setGeometry(QtCore.QRect(250, 70, 181, 32))
+        self.txtVideoAdress.setGeometry(QtCore.QRect(220, 40, 181, 32))
         self.txtVideoAdress.setObjectName("txtVideoAdress")
         self.txtKameraAdress = QtWidgets.QLineEdit(self.groupBox_5)
-        self.txtKameraAdress.setGeometry(QtCore.QRect(10, 70, 201, 32))
+        self.txtKameraAdress.setGeometry(QtCore.QRect(10, 40, 201, 32))
         self.txtKameraAdress.setObjectName("txtKameraAdress")
         self.lblHataGoster = QtWidgets.QLabel(self.centralwidget)
         self.lblHataGoster.setGeometry(QtCore.QRect(740, 0, 178, 49))
