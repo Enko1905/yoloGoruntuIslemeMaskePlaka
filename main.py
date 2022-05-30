@@ -140,7 +140,7 @@ class islem(QMainWindow):
             self.tanimliNesneler.append("kamyon")
         if(self.ui.checkInsan.isChecked()):
             self.tanimliNesneler.append("insan")
-        if(self.ui.checkMotosiklet.isChecked):
+        if(self.ui.checkMotosiklet.isChecked()):
             self.tanimliNesneler.append("motosiklet")
 
     def ozelliklerYaz(self):
