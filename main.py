@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget,QFileDialog
 from PyQt5.QtWidgets import QApplication, QSizePolicy, QGridLayout
 from PyQt5.QtCore import QTimer, QRect, Qt
 from PyQt5.QtGui import QPixmap, QImage
@@ -42,6 +42,7 @@ class islem(QMainWindow):
         self.ui.btnKapat.clicked.connect(app.exit)
         self.ui.btnGoruntuKaydet.clicked.connect(self.ekranKayit)
         self.ui.btnPlakaResimKontrol.clicked.connect(self.plakaResimKontrol)
+        self.ui.btnSec.clicked.connect(self.dosyaYoluSec)
 
         self.ui.checkAraba.stateChanged.connect(self.TanimliNesneEkle)
         self.ui.checkKamyon.stateChanged.connect(self.TanimliNesneEkle)
@@ -94,7 +95,10 @@ class islem(QMainWindow):
             self.maskeCevreAnalizetSec =True
             self.maskeTanimliInsanSec =False
 
+    def dosyaYoluSec(self):
 
+        file , path = QFileDialog.getOpenFileName(self, 'Open a file', '/home','All Files (*.*)')
+        self.ui.txtVideoAdress.setText(file)
 
     def videoAktifKonum(self,selected):
         if(selected):
