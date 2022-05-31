@@ -1,7 +1,6 @@
 
 
 import sqlite3
-from xml.etree.ElementTree import iselement 
 import datetime
 
 

@@ -5,6 +5,7 @@ from numpy import square
 import cv2
 
 #birden fazla tekrar eden verileri sıralama algoritması
+#goruntu icinde su an kullanılmıyor !
 def SetIsleme(tanimliArr):
     bulunan = []
     for arrA in range(len(tanimliArr)):
@@ -17,12 +18,14 @@ def SetIsleme(tanimliArr):
 
 
 #konrinat verilerini txt'ye kayıt içi oluşturuldu 
+#goruntu icinde su an kullanılmıyor !
 def kayitTxt(kordinatArr):
     dosya = open("kordinat.txt","w")
     for arr in kordinatArr:
         dosya.write(str(arr)+"\n")
     dosya.close()
 
+#test su an kullanılmıyor
 def Takip(test,sapma_degeri):
     ciz = True
     if(test[0][1]+sapma_degeri>=test[1][1] or test[0][1]<=test[1][1]+sapma_degeri):
@@ -31,7 +34,7 @@ def Takip(test,sapma_degeri):
 
 
 
-
+#px*cm mesafe hesaplama
 def mesafeHesapla(merkezArr):
     b = abs(merkezArr[0][0] - merkezArr[1][0])
     a = abs(merkezArr[0][1] - merkezArr[1][1])

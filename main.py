@@ -17,7 +17,6 @@ import vt
 
 kr = [0,0]
 class islem(QMainWindow):
-    testaasd = 12
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -78,8 +77,9 @@ class islem(QMainWindow):
     def changeValue(self, value):
         self.sapmaDegeri = value
     def ekranKayit(self):
-        _,kayit = self.cap.read()
-        cv2.imwrite('ekranGoruntusu.jpg',kayit)
+        gr,kayit = self.cap.read()
+        if not gr:
+            cv2.imwrite(f'ekranGoruntu/ekranGoruntu{self.data.tarih.time()}.jpg',kayit)
     def kameraAktifKonum(self,selected):
         if(selected):
             if(self.ui.txtKameraAdress.text() == ""):
@@ -97,7 +97,7 @@ class islem(QMainWindow):
 
     def dosyaYoluSec(self):
 
-        file , path = QFileDialog.getOpenFileName(self, 'Open a file', '/home','All Files (*.*)')
+        file , path = QFileDialog.getOpenFileName(self, 'Video Aç', '/home','video dosyası(*.*)')
         self.ui.txtVideoAdress.setText(file)
 
     def videoAktifKonum(self,selected):
@@ -110,6 +110,7 @@ class islem(QMainWindow):
         try:
             plaka= pltAnaliz.resimKonrol(self.ui.txtPlakaResimAdresi.text())
             self.ui.lblPlakaBilgileri.setText("PLAKA NO :"+plaka)
+            self.data.plakaKayitEt(plaka)
 
         except Exception as hata:
             self.ui.listMessage.addItem("Plaka Adresi Okunamadı ! ")
@@ -203,11 +204,10 @@ class islem(QMainWindow):
                     cv2.rectangle(self.frame, (self.x, self.y), (self.x + self.w, self.y + self.h), (255,20,20), 3)
                     cv2.rectangle(self.frame,(self.x,self.y-5),(self.x+140,self.y-30),(255,100,100),-1)
                     cv2.putText(self.frame, class_name+" "+str(round(score,1)), (self.x, self.y - 7), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,0), 2)
-
-                    if(self.ayiriciMesafe):
-                        self.ayiriciCiz()
                     if(self.girisCikis):
                         self.sayNesne()
+                    if(self.ayiriciMesafe):
+                        self.ayiriciCiz()
                     if(self.maskeTanima):
                         self.maskeAlgila()
 
@@ -261,6 +261,7 @@ class islem(QMainWindow):
             renkSen = [0,255,0,-1]
             kr[0]+=1
             bilgi = "GELEN: "+str(kr[0])+" GİDEN:"+str(kr[1])
+            self.data.girisCikisKayit(kr[0],kr[1])
 
         cv2.circle(self.frame,(x1,self.y),10,(255,255,255),-1)
 
@@ -276,7 +277,8 @@ class islem(QMainWindow):
             kr[1]+=1
             renkSen = [0,255,0,-1]
             bilgi = "GELEN: "+str(kr[0])+" GİDEN:"+str(kr[1])
-        self.data.girisCikisKayit(kr[0],kr[1])
+
+            self.data.girisCikisKayit(kr[0],kr[1])
 
         cv2.rectangle(self.frame,(1200,600),(1900,610),(renkSen[0],renkSen[1],renkSen[2]),renkSen[3])
         cv2.putText(self.frame,("Gidenler"),(1200,600), cv2.FONT_HERSHEY_PLAIN, 3, (0,255,0), 2)
