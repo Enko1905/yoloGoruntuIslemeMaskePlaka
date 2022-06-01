@@ -26,6 +26,7 @@ class islem(QMainWindow):
         self.kameraAdress=0
         self.tanimliNesneler = []
         self.araclarArasiKordinat = []
+        self.aracSinifi = ["araba","kamyon","motosiklet"]
         self.maskeTanima = False
         self.maskeTanimliInsanSec =False
         self.maskeCevreAnalizetSec =True
@@ -205,7 +206,7 @@ class islem(QMainWindow):
                     cv2.rectangle(self.frame,(self.x,self.y-5),(self.x+140,self.y-30),(255,100,100),-1)
                     cv2.putText(self.frame, class_name+" "+str(round(score,1)), (self.x, self.y - 7), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,0), 2)
                     if(self.girisCikis):
-                        self.sayNesne()
+                        self.sayNesne(class_name)
                     if(self.ayiriciMesafe):
                         self.ayiriciCiz()
                     if(self.maskeTanima):
@@ -247,7 +248,7 @@ class islem(QMainWindow):
                 self.araclarArasiKordinat.clear()
 
 
-    def sayNesne(self):
+    def sayNesne(self,aracIsmi):
 
         bilgi =None
         x1 = round((self.x+self.w))
@@ -255,7 +256,7 @@ class islem(QMainWindow):
         if(self.y>600 and self.y <610 and x1>0 and  x1<1200):
             if(self.plakaAnaliz):
                 self.plakaAnalizet(self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
-            if(self.aracResimKaydet):
+            if(self.aracResimKaydet and aracIsmi in self.aracSinifi):
                 cv2.imwrite(f'imagesOto/{self.x,self.y}.png',self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
 
             renkSen = [0,255,0,-1]
@@ -272,7 +273,7 @@ class islem(QMainWindow):
         if(self.y>600 and self.y <610 and x1>1200 and  x1<2300):
             if(self.plakaAnaliz):
                 self.plakaAnalizet(self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
-            if(self.aracResimKaydet):
+            if(self.aracResimKaydet and aracIsmi in self.aracSinifi):
                 cv2.imwrite(f'imagesOto/{self.x,self.y}.png',self.frame[self.y:self.y + self.h, self.x:self.x + self.w])
             kr[1]+=1
             renkSen = [0,255,0,-1]

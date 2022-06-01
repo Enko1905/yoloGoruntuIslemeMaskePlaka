@@ -41,12 +41,7 @@ def readplate(gelenFrame):
         plt = texto
         image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 3)
         image = cv2.putText(image, texto.upper(), (x + 50, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3,cv2.LINE_AA)
-        with open("Plates.txt", "a") as dosya:
-            if texto not in Plakalar:
-                Plakalar.append(texto)
-                for i in Plakalar:
-                    dosya.write(f' \n {i} arac su {DTNow} vakitte geldi.')
-            return str(plt)
+        return str(plt)
 
     except Exception as e:
         print("Tanımlanamıyan Plaka --> "+str(e))
