@@ -238,9 +238,9 @@ class islem(QMainWindow):
                 if(hesap<1):
                     renk_cizgi=[0,0,255]
                     cv2.putText(self.frame,("YAKIN TEMAS"),(200,200), cv2.FONT_HERSHEY_PLAIN, 5, (0,0,255), 9)
-                    self.data.riskDurumuKayit(1)
+                    self.data.riskDurumuKayit(hesap,1)
                     self.ui.listMessage.addItem("YAKIN TEMAS TESPİT EDİLDİ !")
-
+                self.data.riskDurumuKayit(hesap,0)
 
                 cv2.putText(self.frame,str(hesap)+"PX/CM" , (self.x+self.w,y_alt), cv2.FONT_HERSHEY_PLAIN, 3, (255,255,255), 4)
                 cv2.circle(self.frame,(x_ust,y_alt),10,(255,255,255),-1)

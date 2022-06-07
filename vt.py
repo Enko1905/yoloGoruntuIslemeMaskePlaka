@@ -23,7 +23,8 @@ class veriTabani():
                 girisCikisTarihi TEXT)""")
         self.riskDurumu = self.imlec.execute("""CREATE TABLE IF NOT EXISTS TBL_risk(id INTEGER PRIMARY KEY AUTOINCREMENT,
                 tarih TEXT,
-                yakınTemasOlusma INTEGER)""")
+                mesafe INTEGER,
+                yakinTemasOlusma INTEGER)""")
         self.baglanti.close()
                 
             
@@ -37,7 +38,7 @@ class AnalizIslem(veriTabani):
         self.maskesiz = None
         self.giren = None
         self.cikan = None
-        self.tarih = datetime.datetime.now()
+        self.tarih = datetime.datetime.now().strftime("%x %X")
 
     def veriCekFetch(self,sorgu):
         self.imlec.execute(sorgu)
@@ -47,8 +48,7 @@ class AnalizIslem(veriTabani):
          self.baglanti.commit()
 
     def maskeKayit(self,maskesiz):
-        self.maskeTarih = self.tarih.strftime("%x")
-        self.imlec.execute(f"insert into TBL_maskeBilgi (tarih,maskesizSayisi) values ('{self.maskeTarih}',{maskesiz})")
+        self.imlec.execute(f"insert into TBL_maskeBilgi (tarih,maskesizSayisi) values ('{self.tarih}',{maskesiz})")
         self.baglanti.commit()
 
     def girisCikisKayit(self,giren,cikan):
@@ -57,8 +57,8 @@ class AnalizIslem(veriTabani):
     def plakaKayitEt(self,plaka):
         self.imlec.execute(f"insert into TBL_plakaBilgi (tarih,plakaBilgi) values ('{self.tarih}','{plaka}')")
         self.baglanti.commit()
-    def riskDurumuKayit(self,temas):
-        self.imlec.execute(f"insert into TBL_risk (tarih,yakınTemasOlusma) values ('{self.tarih}',{temas})")
+    def riskDurumuKayit(self,mesafe,temas):
+        self.imlec.execute(f"insert into TBL_risk (tarih,mesafe,yakinTemasOlusma) values ('{self.tarih}',{mesafe},{temas})")
         self.baglanti.commit()
 
     #DAHA SONRA EKLENECEL TOPLU LİSTELEME
